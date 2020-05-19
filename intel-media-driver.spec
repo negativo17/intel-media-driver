@@ -2,7 +2,7 @@
 
 Name:           intel-media-driver
 Version:        20.1.1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        VA-API user mode driver for GEN based graphics hardware
 License:        MIT and BSD
 URL:            https://01.org/linuxmedia/vaapi
@@ -11,7 +11,7 @@ Source0:        https://github.com/intel/media-driver/archive/intel-media-%{vers
 Source1:        %{name}.metainfo.xml
 Patch0:         https://salsa.debian.org/multimedia-team/intel-media-driver/raw/master/debian/patches/0002-Remove-settings-based-on-ARCH.patch
 
-BuildRequires:  cmake >= 3.5
+BuildRequires:  cmake3 >= 3.5
 BuildRequires:  gcc-c++
 BuildRequires:  pkgconfig(igdgmm)
 BuildRequires:  pkgconfig(libcmrt)
@@ -42,7 +42,7 @@ pushd build
 export CXXFLAGS="%{optflags} -D_FILE_OFFSET_BITS=64"
 %endif
 
-%cmake \
+%cmake3 \
 %ifarch %{ix86}
   -DARCH:STRING=32 \
 %endif
@@ -79,6 +79,9 @@ install -pm 0644 %{SOURCE1} %{buildroot}%{_metainfodir}
 %endif
 
 %changelog
+* Tue May 19 2020 Simone Caronni <negativo17@gmail.com> - 20.1.1-3
+- Fix macro invocation for CentOS/RHEL 7.
+
 * Tue May 05 2020 Simone Caronni <negativo17@gmail.com> - 20.1.1-2
 - Update SPEC file for CentOS/RHEL 7.
 
