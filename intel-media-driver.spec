@@ -2,7 +2,7 @@
 
 Name:           intel-media-driver
 Version:        20.1.1
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        VA-API user mode driver for GEN based graphics hardware
 License:        MIT and BSD
 URL:            https://01.org/linuxmedia/vaapi
@@ -49,7 +49,7 @@ export CXXFLAGS="%{optflags} -D_FILE_OFFSET_BITS=64"
   -DBUILD_CMRTLIB=OFF \
   -DENABLE_KERNELS=ON \
   -DENABLE_NONFREE_KERNELS=ON \
-  -DINSTALL_DRIVER_SYSCONF=ON \
+  -DINSTALL_DRIVER_SYSCONF=OFF \
   -DMEDIA_BUILD_FATAL_WARNINGS=OFF \
   -DMEDIA_RUN_TEST_SUITE=OFF \
   -DRUN_TEST_SUITE=OFF \
@@ -72,13 +72,16 @@ install -pm 0644 %{SOURCE1} %{buildroot}%{_metainfodir}
 %files
 %license LICENSE.md
 %doc README.md
-%config(noreplace) %{_sysconfdir}/profile.d/intel-media.sh
 %{_libdir}/dri/iHD_drv_video.so
 %if 0%{?fedora} || 0%{?rhel} >= 8
 %{_metainfodir}/%{name}.metainfo.xml
 %endif
 
 %changelog
+* Mon May 25 2020 Simone Caronni <negativo17@gmail.com> - 20.1.1-4
+- Do not install environment variables forcing driver, let it autodetect along
+  with intel-vaapi-driver.
+
 * Tue May 19 2020 Simone Caronni <negativo17@gmail.com> - 20.1.1-3
 - Fix macro invocation for CentOS/RHEL 7.
 
