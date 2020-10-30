@@ -1,8 +1,8 @@
 %define _legacy_common_support 1
 
 Name:           intel-media-driver
-Version:        20.1.1
-Release:        4%{?dist}
+Version:        20.3.0
+Release:        1%{?dist}
 Summary:        VA-API user mode driver for GEN based graphics hardware
 License:        MIT and BSD
 URL:            https://01.org/linuxmedia/vaapi
@@ -78,6 +78,9 @@ install -pm 0644 %{SOURCE1} %{buildroot}%{_metainfodir}
 %endif
 
 %changelog
+* Fri Oct 30 2020 Simone Caronni <negativo17@gmail.com> - 20.3.0-1
+- Update to 2020Q3 Release.
+
 * Mon May 25 2020 Simone Caronni <negativo17@gmail.com> - 20.1.1-4
 - Do not install environment variables forcing driver, let it autodetect along
   with intel-vaapi-driver.
