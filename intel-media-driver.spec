@@ -2,7 +2,7 @@
 %define _legacy_common_support 1
 
 Name:           intel-media-driver
-Version:        20.4.3
+Version:        20.4.5
 Release:        1%{?dist}
 Summary:        VA-API user mode driver for GEN based graphics hardware
 License:        MIT and BSD
@@ -79,6 +79,9 @@ install -pm 0644 %{SOURCE1} %{buildroot}%{_metainfodir}
 %endif
 
 %changelog
+* Tue Jan  5 2021 Simone Caronni <negativo17@gmail.com> - 20.4.5-1
+- Update to Intel Media Driver 2020Q4 Release.
+
 * Tue Dec 08 2020 Simone Caronni <negativo17@gmail.com> - 20.4.3-1
 - Update to 20.4.3.
 
