@@ -3,13 +3,14 @@
 
 Name:           intel-media-driver
 Version:        21.1.3
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        VA-API user mode driver for GEN based graphics hardware
-License:        MIT and BSD
+License:        MIT and BSD-3-Clause
 URL:            https://01.org/linuxmedia/vaapi
 
 Source0:        https://github.com/intel/media-driver/archive/intel-media-%{version}.tar.gz
 Source1:        %{name}.metainfo.xml
+Source2:        %{name}.py
 Patch0:         https://salsa.debian.org/multimedia-team/intel-media-driver/raw/master/debian/patches/0002-Remove-settings-based-on-ARCH.patch
 
 BuildRequires:  cmake3 >= 3.5
@@ -21,6 +22,7 @@ BuildRequires:  pkgconfig(x11)
 
 %if 0%{?fedora} || 0%{?rhel} >= 8
 BuildRequires:  libappstream-glib >= 0.6.3
+BuildRequires:  python3
 %endif
 
 %if 0%{?rhel} == 7
@@ -75,8 +77,13 @@ popd
 
 %if 0%{?fedora} || 0%{?rhel} >= 8
 # Install AppData and add modalias provides
-mkdir -p %{buildroot}%{_metainfodir}
-install -pm 0644 %{SOURCE1} %{buildroot}%{_metainfodir}
+install -pm 0644 -D %{SOURCE1} %{buildroot}%{_metainfodir}/%{name}.metainfo.xml
+%{SOURCE2} . | xargs appstream-util add-provide %{buildroot}%{_metainfodir}/%{name}.metainfo.xml modalias
+%endif
+
+%if 0%{?fedora} || 0%{?rhel} >= 8
+%check
+appstream-util validate --nonet %{buildroot}%{_metainfodir}/%{name}.metainfo.xml
 %endif
 
 %files
@@ -88,6 +95,10 @@ install -pm 0644 %{SOURCE1} %{buildroot}%{_metainfodir}
 %endif
 
 %changelog
+* Wed Apr 14 2021 Simone Caronni <negativo17@gmail.com> - 21.1.3-2
+- Generate PCI vendor data for PackageKit, rework AppStream metadata.
+- Fix license.
+
 * Sun Apr 04 2021 Simone Caronni <negativo17@gmail.com> - 21.1.3-1
 - Update to 2021Q1 Release.
 
