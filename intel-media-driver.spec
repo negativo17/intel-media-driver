@@ -3,7 +3,7 @@
 
 Name:           intel-media-driver
 Version:        21.1.3
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        VA-API user mode driver for GEN based graphics hardware
 License:        MIT and BSD-3-Clause
 URL:            https://01.org/linuxmedia/vaapi
@@ -61,12 +61,13 @@ export CXXFLAGS="%{optflags} -D_FILE_OFFSET_BITS=64"
   -DBUILD_CMRTLIB=OFF \
   -DENABLE_KERNELS=ON \
   -DENABLE_NONFREE_KERNELS=ON \
+  -DENABLE_PRODUCTION_KMD=ON \
   -DINSTALL_DRIVER_SYSCONF=OFF \
   -DMEDIA_BUILD_FATAL_WARNINGS=OFF \
   -DMEDIA_RUN_TEST_SUITE=OFF \
   -DRUN_TEST_SUITE=OFF \
   ..
-%make_build V=1
+%make_build
 
 popd
 
@@ -95,6 +96,9 @@ appstream-util validate --nonet %{buildroot}%{_metainfodir}/%{name}.metainfo.xml
 %endif
 
 %changelog
+* Wed Apr 14 2021 Simone Caronni <negativo17@gmail.com> - 21.1.3-3
+- Enable DG1/SG1 preliminary support.
+
 * Wed Apr 14 2021 Simone Caronni <negativo17@gmail.com> - 21.1.3-2
 - Generate PCI vendor data for PackageKit, rework AppStream metadata.
 - Fix license.
