@@ -13,7 +13,6 @@ Source1:        %{name}.metainfo.xml
 Source2:        %{name}.py
 Patch0:         https://salsa.debian.org/multimedia-team/intel-media-driver/raw/master/debian/patches/0002-Remove-settings-based-on-ARCH.patch
 
-BuildRequires:  cmake3 >= 3.5
 BuildRequires:  pkgconfig(igdgmm)
 BuildRequires:  pkgconfig(libcmrt)
 BuildRequires:  pkgconfig(libva) >= 1.0.0
@@ -21,14 +20,15 @@ BuildRequires:  pkgconfig(pciaccess)
 BuildRequires:  pkgconfig(x11)
 
 %if 0%{?fedora} || 0%{?rhel} >= 8
+BuildRequires:  cmake >= 3.5
+BuildRequires:  gcc-c++
 BuildRequires:  libappstream-glib >= 0.6.3
 BuildRequires:  python3
 %endif
 
 %if 0%{?rhel} == 7
+BuildRequires:  cmake3 >= 3.5
 BuildRequires:  devtoolset-9-gcc-c++
-%else
-BuildRequires:  gcc-c++
 %endif
 
 %description
