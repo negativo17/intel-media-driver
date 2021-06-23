@@ -2,7 +2,7 @@
 %define _legacy_common_support 1
 
 Name:           intel-media-driver
-Version:        21.2.1
+Version:        21.2.2
 Release:        1%{?dist}
 Summary:        VA-API user mode driver for GEN based graphics hardware
 License:        MIT and BSD-3-Clause
@@ -50,11 +50,12 @@ pushd build
 export CXXFLAGS="%{optflags} -D_FILE_OFFSET_BITS=64"
 %endif
 
-%if 0%{?rhel} == 7
+%if 0%{?fedora} || 0%{?rhel} >= 8
+%cmake \
+%else
 . /opt/rh/devtoolset-9/enable
-%endif
-
 %cmake3 \
+%endif
 %ifarch %{ix86}
   -DARCH:STRING=32 \
 %endif
@@ -96,6 +97,10 @@ appstream-util validate --nonet %{buildroot}%{_metainfodir}/%{name}.metainfo.xml
 %endif
 
 %changelog
+* Wed Jun 23 2021 Simone Caronni <negativo17@gmail.com> - 21.2.2-1
+- Update to 21.2.2.
+- Fix build on CentOS/RHEL 8.
+
 * Fri May 28 2021 Simone Caronni <negativo17@gmail.com> - 21.2.1-1
 - Update to 21.2.1.
 
