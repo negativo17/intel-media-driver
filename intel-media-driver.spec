@@ -2,7 +2,7 @@
 %define _legacy_common_support 1
 
 Name:           intel-media-driver
-Version:        22.3.0
+Version:        22.3.1
 Release:        1%{?dist}
 Summary:        VA-API user mode driver for GEN based graphics hardware
 License:        MIT and BSD-3-Clause
@@ -99,6 +99,9 @@ appstream-util validate --nonet %{buildroot}%{_metainfodir}/%{name}.metainfo.xml
 %endif
 
 %changelog
+* Sun Apr 03 2022 Simone Caronni <negativo17@gmail.com> - 22.3.1-1
+- Update to 22.3.1.
+
 * Sat Mar 19 2022 Simone Caronni <negativo17@gmail.com> - 22.3.0-1
 - Update to 22.3.0.
 
