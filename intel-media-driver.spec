@@ -11,38 +11,47 @@ URL:            https://01.org/linuxmedia/vaapi
 Source0:        https://github.com/intel/media-driver/archive/intel-media-%{version}.tar.gz
 Source1:        %{name}.metainfo.xml
 Source2:        %{name}.py
-Patch0:         https://salsa.debian.org/multimedia-team/intel-media-driver/raw/master/debian/patches/0002-Remove-settings-based-on-ARCH.patch
 
 BuildRequires:  pkgconfig(igdgmm)
-BuildRequires:  pkgconfig(libcmrt)
 BuildRequires:  pkgconfig(libva) >= 1.0.0
 BuildRequires:  pkgconfig(pciaccess)
 BuildRequires:  pkgconfig(x11)
 
-%if 0%{?fedora} || 0%{?rhel} >= 8
+%if 0%{?rhel} == 7
+BuildRequires:  cmake3 >= 3.5
+BuildRequires:  devtoolset-9-gcc-c++
+%else
 BuildRequires:  cmake >= 3.5
 BuildRequires:  gcc-c++
 BuildRequires:  libappstream-glib >= 0.6.3
 BuildRequires:  python3
 %endif
 
-%if 0%{?rhel} == 7
-BuildRequires:  cmake3 >= 3.5
-BuildRequires:  devtoolset-9-gcc-c++
-%endif
-
 Requires:       libva%{?_isa}
+Obsoletes:      cmrt < %{version}-%{release}
+Provides:       cmrt = %{version}-%{release}
+Provides:       bundled(cmrt)
 
 %description
-The Intel(R) Media Driver for VAAPI is a new VA-API (Video Acceleration API)
-user mode driver supporting hardware accelerated decoding, encoding, and video
-post processing for GEN based graphics hardware.
+The Intel Media Driver for VAAPI is a new VA-API (Video Acceleration API) user
+mode driver supporting hardware accelerated decoding, encoding, and video post
+processing for GEN based graphics hardware.
+
+%package        devel
+Summary:        Development files for %{name}
+Requires:       %{name}%{?_isa} = %{version}-%{release}
+Requires:       pkgconfig
+
+%description    devel
+This package contains development files for the Intel Media Driver for VAAPI.
 
 %prep
 %autosetup -p1 -n media-driver-intel-media-%{version}
 
 # rpmlint fixes
-find . -name "*.cpp" -o -name "*.md" -o -name "*.txt" -o -name "*.h" -exec chmod 644 {} \;
+find . -name "*.cpp" -o -name "*.md" -o -name "*.txt" -o -name "*.h" -o -name "*.cmake" -exec chmod 644 {} \;
+
+sed -e "/-Werror=address/d" -i media_driver/cmake/linux/media_compile_flags_linux.cmake
 
 %build
 mkdir build
@@ -52,16 +61,16 @@ pushd build
 export CXXFLAGS="%{optflags} -D_FILE_OFFSET_BITS=64"
 %endif
 
-%if 0%{?fedora} || 0%{?rhel} >= 8
-%cmake \
-%else
+%if 0%{?rhel} == 7
 . /opt/rh/devtoolset-9/enable
 %cmake3 \
+%else
+%cmake \
 %endif
 %ifarch %{ix86}
   -DARCH:STRING=32 \
 %endif
-  -DBUILD_CMRTLIB=OFF \
+  -DBUILD_CMRTLIB=ON \
   -DENABLE_KERNELS=ON \
   -DENABLE_NONFREE_KERNELS=ON \
   -DENABLE_PRODUCTION_KMD=ON \
@@ -70,37 +79,53 @@ export CXXFLAGS="%{optflags} -D_FILE_OFFSET_BITS=64"
   -DMEDIA_RUN_TEST_SUITE=OFF \
   -DRUN_TEST_SUITE=OFF \
   ..
-%make_build
+
+%if 0%{?rhel} == 7
+%cmake3_build
+%else
+%cmake_build
+%endif
 
 popd
 
 %install
 pushd build
-%make_install
+%if 0%{?rhel} == 7
+%cmake3_install
+%else
+%cmake_install
+%endif
 popd
 
 %if 0%{?fedora} || 0%{?rhel} >= 8
 # Install AppData and add modalias provides
 install -pm 0644 -D %{SOURCE1} %{buildroot}%{_metainfodir}/%{name}.metainfo.xml
 %{SOURCE2} . | xargs appstream-util add-provide %{buildroot}%{_metainfodir}/%{name}.metainfo.xml modalias
-%endif
 
-%if 0%{?fedora} || 0%{?rhel} >= 8
 %check
 appstream-util validate --nonet %{buildroot}%{_metainfodir}/%{name}.metainfo.xml
 %endif
+
+%{?ldconfig_scriptlets}
 
 %files
 %license LICENSE.md
 %doc README.md
 %{_libdir}/dri/iHD_drv_video.so
+%{_libdir}/libigfxcmrt.so.*
 %if 0%{?fedora} || 0%{?rhel} >= 8
 %{_metainfodir}/%{name}.metainfo.xml
 %endif
 
+%files devel
+%{_includedir}/igfxcmrt
+%{_libdir}/libigfxcmrt.so
+%{_libdir}/pkgconfig/igfxcmrt.pc
+
 %changelog
 * Sun Apr 03 2022 Simone Caronni <negativo17@gmail.com> - 22.3.1-1
 - Update to 22.3.1.
+- Rework SPEC file.
 
 * Sat Mar 19 2022 Simone Caronni <negativo17@gmail.com> - 22.3.0-1
 - Update to 22.3.0.
