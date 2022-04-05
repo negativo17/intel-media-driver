@@ -1,9 +1,6 @@
-%global __cmake_in_source_build 1
-%define _legacy_common_support 1
-
 Name:           intel-media-driver
 Version:        22.3.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        VA-API user mode driver for GEN based graphics hardware
 License:        MIT and BSD-3-Clause
 URL:            https://01.org/linuxmedia/vaapi
@@ -17,15 +14,11 @@ BuildRequires:  pkgconfig(libva) >= 1.0.0
 BuildRequires:  pkgconfig(pciaccess)
 BuildRequires:  pkgconfig(x11)
 
-%if 0%{?rhel} == 7
 BuildRequires:  cmake3 >= 3.5
 BuildRequires:  devtoolset-9-gcc-c++
-%else
-BuildRequires:  cmake >= 3.5
 BuildRequires:  gcc-c++
 BuildRequires:  libappstream-glib >= 0.6.3
 BuildRequires:  python3
-%endif
 
 Requires:       libva%{?_isa}
 Obsoletes:      cmrt < %{version}-%{release}
@@ -61,12 +54,9 @@ pushd build
 export CXXFLAGS="%{optflags} -D_FILE_OFFSET_BITS=64"
 %endif
 
-%if 0%{?rhel} == 7
 . /opt/rh/devtoolset-9/enable
+
 %cmake3 \
-%else
-%cmake \
-%endif
 %ifarch %{ix86}
   -DARCH:STRING=32 \
 %endif
@@ -80,31 +70,14 @@ export CXXFLAGS="%{optflags} -D_FILE_OFFSET_BITS=64"
   -DRUN_TEST_SUITE=OFF \
   ..
 
-%if 0%{?rhel} == 7
 %cmake3_build
-%else
-%cmake_build
-%endif
 
 popd
 
 %install
 pushd build
-%if 0%{?rhel} == 7
 %cmake3_install
-%else
-%cmake_install
-%endif
 popd
-
-%if 0%{?fedora} || 0%{?rhel} >= 8
-# Install AppData and add modalias provides
-install -pm 0644 -D %{SOURCE1} %{buildroot}%{_metainfodir}/%{name}.metainfo.xml
-%{SOURCE2} . | xargs appstream-util add-provide %{buildroot}%{_metainfodir}/%{name}.metainfo.xml modalias
-
-%check
-appstream-util validate --nonet %{buildroot}%{_metainfodir}/%{name}.metainfo.xml
-%endif
 
 %{?ldconfig_scriptlets}
 
@@ -113,9 +86,6 @@ appstream-util validate --nonet %{buildroot}%{_metainfodir}/%{name}.metainfo.xml
 %doc README.md
 %{_libdir}/dri/iHD_drv_video.so
 %{_libdir}/libigfxcmrt.so.*
-%if 0%{?fedora} || 0%{?rhel} >= 8
-%{_metainfodir}/%{name}.metainfo.xml
-%endif
 
 %files devel
 %{_includedir}/igfxcmrt
@@ -123,6 +93,9 @@ appstream-util validate --nonet %{buildroot}%{_metainfodir}/%{name}.metainfo.xml
 %{_libdir}/pkgconfig/igfxcmrt.pc
 
 %changelog
+* Tue Apr 05 2022 Simone Caronni <negativo17@gmail.com> - 22.3.1-2
+- Split configuration for the different branches.
+
 * Sun Apr 03 2022 Simone Caronni <negativo17@gmail.com> - 22.3.1-1
 - Update to 22.3.1.
 - Rework SPEC file.
