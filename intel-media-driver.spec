@@ -1,6 +1,6 @@
 Name:           intel-media-driver
-Version:        22.3.1
-Release:        2%{?dist}
+Version:        22.4.0
+Release:        1%{?dist}
 Summary:        VA-API user mode driver for GEN based graphics hardware
 License:        MIT and BSD-3-Clause
 URL:            https://01.org/linuxmedia/vaapi
@@ -87,6 +87,9 @@ appstream-util validate --nonet %{buildroot}%{_metainfodir}/%{name}.metainfo.xml
 %{_libdir}/pkgconfig/igfxcmrt.pc
 
 %changelog
+* Tue Apr 26 2022 Simone Caronni <negativo17@gmail.com> - 22.4.0-1
+- Update to 22.4.0.
+
 * Tue Apr 05 2022 Simone Caronni <negativo17@gmail.com> - 22.3.1-2
 - Split configuration for the different branches.
 
