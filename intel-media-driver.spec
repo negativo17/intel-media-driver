@@ -1,5 +1,5 @@
 Name:           intel-media-driver
-Version:        22.5.2
+Version:        22.5.3
 Release:        1%{?dist}
 Summary:        VA-API user mode driver for GEN based graphics hardware
 License:        MIT and BSD-3-Clause
@@ -87,6 +87,9 @@ appstream-util validate --nonet %{buildroot}%{_metainfodir}/%{name}.metainfo.xml
 %{_libdir}/pkgconfig/igfxcmrt.pc
 
 %changelog
+* Wed Aug 24 2022 Simone Caronni <negativo17@gmail.com> - 22.5.3-1
+- Update to 22.5.3.
+
 * Wed Aug 17 2022 Simone Caronni <negativo17@gmail.com> - 22.5.2-1
 - Update to 22.5.2.
 
