@@ -1,5 +1,5 @@
 Name:           intel-media-driver
-Version:        23.1.1
+Version:        23.1.2
 Release:        1%{?dist}
 Summary:        VA-API user mode driver for GEN based graphics hardware
 License:        MIT and BSD-3-Clause
@@ -93,6 +93,9 @@ popd
 %{_libdir}/pkgconfig/igfxcmrt.pc
 
 %changelog
+* Fri Feb 24 2023 Simone Caronni <negativo17@gmail.com> - 23.1.2-1
+- Update to 23.1.2.
+
 * Fri Feb 10 2023 Simone Caronni <negativo17@gmail.com> - 23.1.1-1
 - Update to 23.1.1.
 
