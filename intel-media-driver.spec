@@ -1,7 +1,7 @@
 %undefine       __cmake_in_source_build
 
 Name:           intel-media-driver
-Version:        23.3.4
+Version:        23.3.5
 Release:        1%{?dist}
 Summary:        VA-API user mode driver for GEN based graphics hardware
 License:        MIT and BSD-3-Clause
@@ -43,8 +43,6 @@ This package contains development files for the Intel Media Driver for VAAPI.
 
 # rpmlint fixes
 find . -name "*.cpp" -o -name "*.md" -o -name "*.txt" -o -name "*.h" -o -name "*.cmake" -exec chmod 644 {} \;
-
-sed -e "/-Werror=address/d" -i media_driver/cmake/linux/media_compile_flags_linux.cmake
 
 %build
 %ifarch %{ix86}
@@ -89,6 +87,9 @@ appstream-util validate --nonet %{buildroot}%{_metainfodir}/%{name}.metainfo.xml
 %{_libdir}/pkgconfig/igfxcmrt.pc
 
 %changelog
+* Fri Nov 03 2023 Simone Caronni <negativo17@gmail.com> - 23.3.5-1
+- Update to 23.3.5.
+
 * Mon Oct 02 2023 Simone Caronni <negativo17@gmail.com> - 23.3.4-1
 - Update to 23.3.4.
 
