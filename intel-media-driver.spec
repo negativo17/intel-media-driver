@@ -57,6 +57,8 @@ export CXXFLAGS="%{optflags} -D_FILE_OFFSET_BITS=64"
 %cmake3 \
 %ifarch %{ix86}
   -DARCH:STRING=32 \
+  -DARL=OFF \
+  -DMTL=OFF \
 %endif
   -DBUILD_CMRTLIB=ON \
   -DENABLE_KERNELS=ON \
@@ -93,6 +95,7 @@ popd
 %changelog
 * Fri Nov 03 2023 Simone Caronni <negativo17@gmail.com> - 23.3.5-1
 - Update to 23.3.5.
+- Disable Meteor/Arrow Lake platforms in 32 bit builds.
 
 * Mon Oct 02 2023 Simone Caronni <negativo17@gmail.com> - 23.3.4-1
 - Update to 23.3.4.
