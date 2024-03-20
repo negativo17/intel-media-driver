@@ -1,7 +1,7 @@
 %undefine       __cmake_in_source_build
 
 Name:           intel-media-driver
-Version:        24.1.3
+Version:        24.1.5
 Release:        1%{?dist}
 Summary:        VA-API user mode driver for GEN based graphics hardware
 License:        MIT and BSD-3-Clause
@@ -87,6 +87,9 @@ appstream-util validate --nonet %{buildroot}%{_metainfodir}/%{name}.metainfo.xml
 %{_libdir}/pkgconfig/igfxcmrt.pc
 
 %changelog
+* Wed Mar 20 2024 Simone Caronni <negativo17@gmail.com> - 24.1.5-1
+- Update to 24.1.5.
+
 * Mon Feb 19 2024 Simone Caronni <negativo17@gmail.com> - 24.1.3-1
 - Update to 24.1.3.
 - Re-enable Meteor/Arrow Lake platforms in 32 bit builds.
