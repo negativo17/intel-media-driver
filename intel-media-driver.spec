@@ -1,5 +1,5 @@
 Name:           intel-media-driver
-Version:        24.1.5
+Version:        24.2.0
 Release:        1%{?dist}
 Epoch:          1
 Summary:        VA-API user mode driver for GEN based graphics hardware
@@ -30,7 +30,7 @@ Requires:       libva%{?_isa}
 Obsoletes:      cmrt < %{epoch}:%{version}-%{release}
 Provides:       cmrt = %{epoch}:%{version}-%{release}
 Obsoletes:      intel-media-driver < %{epoch}:%{version}-%{release}
-Provides:       intel-media-driver = %{epoch}:%{version}-%{release}
+Provides:       intel-media-driver%{?_isa} = %{epoch}:%{version}-%{release}
 Provides:       bundled(cmrt)
 
 %description -n libva-intel-media-driver
@@ -109,6 +109,9 @@ appstream-util validate --nonet %{buildroot}%{_metainfodir}/%{name}.metainfo.xml
 %{_libdir}/pkgconfig/igfxcmrt.pc
 
 %changelog
+* Mon Apr 15 2024 Simone Caronni <negativo17@gmail.com> - 1:24.2.0-1
+- Update to 24.2.0.
+
 * Mon Apr 15 2024 Simone Caronni <negativo17@gmail.com> - 1:24.1.5-1
 - Rename to match with Fedora's packages.
 - Trim changelog.
