@@ -1,6 +1,7 @@
 Name:           intel-media-driver
 Version:        24.1.5
 Release:        1%{?dist}
+Epoch:          1
 Summary:        VA-API user mode driver for GEN based graphics hardware
 License:        MIT and BSD-3-Clause
 URL:            https://01.org/linuxmedia/vaapi
@@ -20,23 +21,43 @@ BuildRequires:  gcc-c++
 BuildRequires:  libappstream-glib >= 0.6.3
 BuildRequires:  python3
 
-Requires:       libva%{?_isa}
-Obsoletes:      cmrt < %{version}-%{release}
-Provides:       cmrt = %{version}-%{release}
-Provides:       bundled(cmrt)
-
 %description
 The Intel Media Driver for VAAPI is a new VA-API (Video Acceleration API) user
 mode driver supporting hardware accelerated decoding, encoding, and video post
 processing for GEN based graphics hardware.
 
-%package        devel
-Summary:        Development files for %{name}
-Requires:       %{name}%{?_isa} = %{version}-%{release}
+%package -n     libva-intel-media-driver
+Summary:        VA-API user mode driver for GEN based graphics hardware
+Requires:       libva%{?_isa}
+Obsoletes:      cmrt < %{epoch}:%{version}-%{release}
+Provides:       cmrt = %{epoch}:%{version}-%{release}
+Obsoletes:      intel-media-driver < %{epoch}:%{version}-%{release}
+Provides:       intel-media-driver = %{epoch}:%{version}-%{release}
+Provides:       bundled(cmrt)
+
+%description -n libva-intel-media-driver
+The Intel Media Driver for VAAPI is a new VA-API (Video Acceleration API) user
+mode driver supporting hardware accelerated decoding, encoding, and video post
+processing for GEN based graphics hardware.
+
+%package -n     libigfxcmrt
+Summary:        Library to load own GPU kernels on render engine via Intel media driver.
+Requires:       libva-intel-media-driver%{?_isa} = %{epoch}:%{version}-%{release}
+
+%description -n libigfxcmrt
+libigfxcmrt is a runtime library needed when user wants to execute their own GPU
+kernels on render engine. It calls Intel media driver to load the kernels and
+allocate the resources. It provides a set of APIs for user to call directly from
+application.
+
+%package -n     libigfxcmrt-devel
+Summary:        Development files for libigfxcmrt
+Requires:       libigfxcmrt%{?_isa} = %{epoch}:%{version}-%{release}
 Requires:       pkgconfig
 
-%description    devel
-This package contains development files for the Intel Media Driver for VAAPI.
+%description -n libigfxcmrt-devel
+The libigfxcmrt-devel package contains libraries and header files for developing
+applications that use libigfxcmrt.
 
 %prep
 %autosetup -p1 -n media-driver-intel-media-%{version}
@@ -79,18 +100,25 @@ popd
 
 %{?ldconfig_scriptlets}
 
-%files
+%files -n libva-intel-media-driver
 %license LICENSE.md
 %doc README.md
 %{_libdir}/dri/iHD_drv_video.so
+
+%files -n libigfxcmrt
+%license LICENSE.md
 %{_libdir}/libigfxcmrt.so.*
 
-%files devel
+%files -n libigfxcmrt-devel
 %{_includedir}/igfxcmrt
 %{_libdir}/libigfxcmrt.so
 %{_libdir}/pkgconfig/igfxcmrt.pc
 
 %changelog
+* Mon Apr 15 2024 Simone Caronni <negativo17@gmail.com> - 1:24.1.5-1
+- Rename to match with Fedora's packages.
+- Trim changelog.
+
 * Wed Mar 20 2024 Simone Caronni <negativo17@gmail.com> - 24.1.5-1
 - Update to 24.1.5.
 
@@ -198,66 +226,3 @@ popd
 
 * Thu Feb 03 2022 Simone Caronni <negativo17@gmail.com> - 22.1.1-1
 - Update to 22.1.1.
-
-* Mon Dec 27 2021 Simone Caronni <negativo17@gmail.com> - 21.4.3-1
-- Update to 21.4.3.
-
-* Mon Oct 25 2021 Simone Caronni <negativo17@gmail.com> - 21.3.5-1
-- Update to Intel Media Driver 2021Q3 Release.
-
-* Sat Sep 04 2021 Simone Caronni <negativo17@gmail.com> - 21.3.3-1
-- Update to 21.3.3.
-
-* Sun Aug 15 2021 Simone Caronni <negativo17@gmail.com> - 21.3.1-1
-- Update to 21.3.1.
-
-* Wed Jun 23 2021 Simone Caronni <negativo17@gmail.com> - 21.2.2-1
-- Update to 21.2.2.
-- Fix build on CentOS/RHEL 8.
-
-* Fri May 28 2021 Simone Caronni <negativo17@gmail.com> - 21.2.1-1
-- Update to 21.2.1.
-
-* Wed Apr 14 2021 Simone Caronni <negativo17@gmail.com> - 21.1.3-3
-- Enable DG1/SG1 preliminary support.
-
-* Wed Apr 14 2021 Simone Caronni <negativo17@gmail.com> - 21.1.3-2
-- Generate PCI vendor data for PackageKit, rework AppStream metadata.
-- Fix license.
-
-* Sun Apr 04 2021 Simone Caronni <negativo17@gmail.com> - 21.1.3-1
-- Update to 2021Q1 Release.
-
-* Sun Mar 14 2021 Simone Caronni <negativo17@gmail.com> - 21.1.2-1
-- Update to 21.1.2.
-
-* Mon Mar 01 2021 Simone Caronni <negativo17@gmail.com> - 21.1.1-1
-- Update to 21.1.1.
-
-* Tue Jan  5 2021 Simone Caronni <negativo17@gmail.com> - 20.4.5-1
-- Update to Intel Media Driver 2020Q4 Release.
-
-* Tue Dec 08 2020 Simone Caronni <negativo17@gmail.com> - 20.4.3-1
-- Update to 20.4.3.
-
-* Fri Dec 04 2020 Simone Caronni <negativo17@gmail.com> - 20.4.2-1
-- Update to 20.4.2.
-
-* Fri Oct 30 2020 Simone Caronni <negativo17@gmail.com> - 20.3.0-1
-- Update to 2020Q3 Release.
-
-* Mon May 25 2020 Simone Caronni <negativo17@gmail.com> - 20.1.1-4
-- Do not install environment variables forcing driver, let it autodetect along
-  with intel-vaapi-driver.
-
-* Tue May 19 2020 Simone Caronni <negativo17@gmail.com> - 20.1.1-3
-- Fix macro invocation for CentOS/RHEL 7.
-
-* Tue May 05 2020 Simone Caronni <negativo17@gmail.com> - 20.1.1-2
-- Update SPEC file for CentOS/RHEL 7.
-
-* Sun Apr 26 2020 Simone Caronni <negativo17@gmail.com> - 20.1.1-1
-- Update to 2020 Q1 Release.
-
-* Fri Nov 01 2019 Simone Caronni <negativo17@gmail.com> - 19.3.1-1
-- First build.
