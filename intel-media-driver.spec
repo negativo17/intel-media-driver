@@ -1,5 +1,5 @@
 Name:           intel-media-driver
-Version:        24.2.2
+Version:        24.2.3
 Release:        1%{?dist}
 Epoch:          1
 Summary:        VA-API user mode driver for GEN based graphics hardware
@@ -9,6 +9,7 @@ URL:            https://01.org/linuxmedia/vaapi
 Source0:        https://github.com/intel/media-driver/archive/intel-media-%{version}.tar.gz
 Source1:        %{name}.metainfo.xml
 Source2:        %{name}.py
+Patch0:         %{name}-info.patch
 
 BuildRequires:  cmake
 BuildRequires:  gcc-c++
@@ -109,6 +110,10 @@ appstream-util validate --nonet %{buildroot}%{_metainfodir}/%{name}.metainfo.xml
 %{_libdir}/pkgconfig/igfxcmrt.pc
 
 %changelog
+* Thu May 23 2024 Simone Caronni <negativo17@gmail.com> - 1:24.2.3-1
+- Update to 24.2.3.
+- Print if it's a Free Kernel or Full Feature build in the information string.
+
 * Sat May 04 2024 Simone Caronni <negativo17@gmail.com> - 1:24.2.2-1
 - Update to 24.2.2.
 
