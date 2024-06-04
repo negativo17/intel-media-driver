@@ -1,5 +1,5 @@
 Name:           intel-media-driver
-Version:        24.2.3
+Version:        24.2.4
 Release:        1%{?dist}
 Epoch:          1
 Summary:        VA-API user mode driver for GEN based graphics hardware
@@ -116,6 +116,9 @@ popd
 %{_libdir}/pkgconfig/igfxcmrt.pc
 
 %changelog
+* Tue Jun 04 2024 Simone Caronni <negativo17@gmail.com> - 1:24.2.4-1
+- Update to 24.2.4.
+
 * Thu May 23 2024 Simone Caronni <negativo17@gmail.com> - 1:24.2.3-1
 - Update to 24.2.3.
 - Print if it's a Free Kernel or Full Feature build in the information string.
