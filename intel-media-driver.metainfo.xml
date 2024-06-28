@@ -3,8 +3,10 @@
   <id>intel-media-driver</id>
   <name>Intel VA-API driver</name>
   <summary>Hardware accelerated decoding, encoding, and video post processing for GEN based graphics hardware</summary>
-  <developer_name>Intel Corporation</developer_name>
-  <icon type="remote" width="128" height="128">https://truera.com/wp-content/uploads/2022/12/intel-logo-square.svg</icon>
+  <developer id="com.intel">
+    <name>Intel Corporation</name>
+  </developer>
+  <icon type="local">/usr/share/pixmaps/intel-media-driver.svg</icon>
   <description>
     <p>The Intel Media Driver for VAAPI is a new VA-API (Video Acceleration API) user mode driver supporting hardware accelerated decoding, encoding, and video post processing for GEN based graphics hardware.</p>
   </description>
