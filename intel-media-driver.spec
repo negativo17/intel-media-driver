@@ -1,6 +1,6 @@
 Name:           intel-media-driver
 Version:        24.2.5
-Release:        1%{?dist}
+Release:        2%{?dist}
 Epoch:          1
 Summary:        VA-API user mode driver for GEN based graphics hardware
 License:        MIT and BSD-3-Clause
@@ -9,6 +9,7 @@ URL:            https://01.org/linuxmedia/vaapi
 Source0:        https://github.com/intel/media-driver/archive/intel-media-%{version}.tar.gz
 Source1:        %{name}.metainfo.xml
 Source2:        %{name}.py
+Source3:        %{name}.svg
 Patch0:         %{name}-info.patch
 
 BuildRequires:  cmake
@@ -90,6 +91,7 @@ export CXXFLAGS="%{optflags} -D_FILE_OFFSET_BITS=64"
 # Install AppData and add modalias provides
 install -pm 0644 -D %{SOURCE1} %{buildroot}%{_metainfodir}/%{name}.metainfo.xml
 %{SOURCE2} . | xargs appstream-util add-provide %{buildroot}%{_metainfodir}/%{name}.metainfo.xml modalias
+install -pm 0644 -D %{SOURCE3} %{buildroot}%{_datadir}/pixmaps/%{name}.svg
 
 %check
 appstream-util validate --nonet %{buildroot}%{_metainfodir}/%{name}.metainfo.xml
@@ -99,6 +101,7 @@ appstream-util validate --nonet %{buildroot}%{_metainfodir}/%{name}.metainfo.xml
 %doc README.md
 %{_libdir}/dri/iHD_drv_video.so
 %{_metainfodir}/%{name}.metainfo.xml
+%{_datadir}/pixmaps/%{name}.svg
 
 %files -n libigfxcmrt
 %license LICENSE.md
@@ -110,6 +113,9 @@ appstream-util validate --nonet %{buildroot}%{_metainfodir}/%{name}.metainfo.xml
 %{_libdir}/pkgconfig/igfxcmrt.pc
 
 %changelog
+* Fri Jun 28 2024 Simone Caronni <negativo17@gmail.com> - 1:24.2.5-2
+- Make sure there are no redirects in the Appstream metadata URLs.
+
 * Tue Jun 25 2024 Simone Caronni <negativo17@gmail.com> - 1:24.2.5-1
 - Update to 24.2.5.
 - Add icon to AppData.
