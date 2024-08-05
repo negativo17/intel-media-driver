@@ -1,6 +1,6 @@
 Name:           intel-media-driver
-Version:        24.2.5
-Release:        2%{?dist}
+Version:        24.3.1
+Release:        1%{?dist}
 Epoch:          1
 Summary:        VA-API user mode driver for GEN based graphics hardware
 License:        MIT and BSD-3-Clause
@@ -113,6 +113,9 @@ appstream-util validate --nonet %{buildroot}%{_metainfodir}/%{name}.metainfo.xml
 %{_libdir}/pkgconfig/igfxcmrt.pc
 
 %changelog
+* Mon Aug 05 2024 Simone Caronni <negativo17@gmail.com> - 1:24.3.1-1
+- Update to 24.3.1.
+
 * Fri Jun 28 2024 Simone Caronni <negativo17@gmail.com> - 1:24.2.5-2
 - Make sure there are no redirects in the Appstream metadata URLs.
 
