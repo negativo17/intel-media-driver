@@ -1,7 +1,7 @@
 %undefine       __cmake_in_source_build
 
 Name:           intel-media-driver
-Version:        24.4.4
+Version:        25.1.3
 Release:        1%{?dist}
 Epoch:          1
 Summary:        VA-API user mode driver for GEN based graphics hardware
@@ -115,6 +115,10 @@ appstream-util validate --nonet %{buildroot}%{_metainfodir}/%{name}.metainfo.xml
 %{_libdir}/pkgconfig/igfxcmrt.pc
 
 %changelog
+* Tue Mar 18 2025 Simone Caronni <negativo17@gmail.com> - 1:25.1.3-1
+- Update to 25.1.3.
+- Trim changelog.
+
 * Fri Dec 27 2024 Simone Caronni <negativo17@gmail.com> - 1:24.4.4-1
 - Update to 24.4.4.
 
@@ -166,40 +170,3 @@ appstream-util validate --nonet %{buildroot}%{_metainfodir}/%{name}.metainfo.xml
 
 * Thu Jan 25 2024 Simone Caronni <negativo17@gmail.com> - 24.1.1-1
 - Update to 24.1.1.
-
-* Thu Dec 14 2023 Simone Caronni <negativo17@gmail.com> - 23.4.3-1
-- Update to 23.4.3.
-
-* Fri Nov 03 2023 Simone Caronni <negativo17@gmail.com> - 23.3.5-1
-- Update to 23.3.5.
-- Disable Meteor/Arrow Lake platforms in 32 bit builds.
-
-* Mon Oct 02 2023 Simone Caronni <negativo17@gmail.com> - 23.3.4-1
-- Update to 23.3.4.
-
-* Tue Aug 08 2023 Simone Caronni <negativo17@gmail.com> - 23.3.1-1
-- Update to 23.3.1.
-
-* Mon Jul 17 2023 Simone Caronni <negativo17@gmail.com> - 23.3.0-1
-- Update to 23.3.0.
-
-* Tue May 23 2023 Simone Caronni <negativo17@gmail.com> - 23.2.2-1
-- Update to 23.2.2.
-
-* Wed Apr 19 2023 Simone Caronni <negativo17@gmail.com> - 23.2.0-1
-- Update to 23.2.0.
-
-* Thu Apr 13 2023 Simone Caronni <negativo17@gmail.com> - 23.1.6-1
-- Update to 23.1.6.
-
-* Sat Mar 11 2023 Simone Caronni <negativo17@gmail.com> - 23.1.3-1
-- Update to 23.1.3.
-
-* Fri Feb 24 2023 Simone Caronni <negativo17@gmail.com> - 23.1.2-1
-- Update to 23.1.2.
-
-* Fri Feb 10 2023 Simone Caronni <negativo17@gmail.com> - 23.1.1-1
-- Update to 23.1.1.
-
-* Mon Jan 30 2023 Simone Caronni <negativo17@gmail.com> - 23.1.0-1
-- Update to 23.1.0.
