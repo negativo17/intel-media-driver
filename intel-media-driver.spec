@@ -1,7 +1,7 @@
 %undefine       __cmake_in_source_build
 
 Name:           intel-media-driver
-Version:        25.1.3
+Version:        25.2.0
 Release:        1%{?dist}
 Epoch:          1
 Summary:        VA-API user mode driver for GEN based graphics hardware
@@ -115,6 +115,9 @@ appstream-util validate --nonet %{buildroot}%{_metainfodir}/%{name}.metainfo.xml
 %{_libdir}/pkgconfig/igfxcmrt.pc
 
 %changelog
+* Wed Apr 16 2025 Simone Caronni <negativo17@gmail.com> - 1:25.2.0-1
+- Update to 25.2.0.
+
 * Tue Mar 18 2025 Simone Caronni <negativo17@gmail.com> - 1:25.1.3-1
 - Update to 25.1.3.
 - Trim changelog.
