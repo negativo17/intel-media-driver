@@ -1,7 +1,7 @@
-diff -Naur media-driver-intel-media-24.2.2.old/media_driver/cmake/linux/media_feature_flags_linux.cmake media-driver-intel-media-24.2.2/media_driver/cmake/linux/media_feature_flags_linux.cmake
---- media-driver-intel-media-24.2.2.old/media_driver/cmake/linux/media_feature_flags_linux.cmake	2024-05-23 14:14:33.328603130 +0200
-+++ media-driver-intel-media-24.2.2/media_driver/cmake/linux/media_feature_flags_linux.cmake	2024-05-23 14:16:21.132866772 +0200
-@@ -182,6 +182,9 @@
+diff -Naur media-driver-intel-media-25.2.5.old/media_driver/cmake/linux/media_feature_flags_linux.cmake media-driver-intel-media-25.2.5/media_driver/cmake/linux/media_feature_flags_linux.cmake
+--- media-driver-intel-media-25.2.5.old/media_driver/cmake/linux/media_feature_flags_linux.cmake	2025-06-23 15:17:04.294917923 +0200
++++ media-driver-intel-media-25.2.5/media_driver/cmake/linux/media_feature_flags_linux.cmake	2025-06-23 15:17:11.923312140 +0200
+@@ -179,6 +179,9 @@
  
  if(NOT ENABLE_NONFREE_KERNELS)
      add_definitions(-D_FULL_OPEN_SOURCE)
@@ -10,11 +10,11 @@ diff -Naur media-driver-intel-media-24.2.2.old/media_driver/cmake/linux/media_fe
 +    add_definitions(-DBUILD_DETAILS="Full Feature Build")
  endif()
  
- if(ENABLE_XE_KMD)
-diff -Naur media-driver-intel-media-24.2.2.old/media_driver/linux/common/ddi/media_libva.h media-driver-intel-media-24.2.2/media_driver/linux/common/ddi/media_libva.h
---- media-driver-intel-media-24.2.2.old/media_driver/linux/common/ddi/media_libva.h	2024-05-23 14:14:33.332603143 +0200
-+++ media-driver-intel-media-24.2.2/media_driver/linux/common/ddi/media_libva.h	2024-05-23 14:16:52.976946309 +0200
-@@ -70,7 +70,7 @@
+ include(${MEDIA_EXT_CMAKE}/ext/linux/media_feature_flags_linux_ext.cmake OPTIONAL)
+diff -Naur media-driver-intel-media-25.2.5.old/media_driver/linux/common/ddi/media_libva.h media-driver-intel-media-25.2.5/media_driver/linux/common/ddi/media_libva.h
+--- media-driver-intel-media-25.2.5.old/media_driver/linux/common/ddi/media_libva.h	2025-06-23 15:17:04.310941311 +0200
++++ media-driver-intel-media-25.2.5/media_driver/linux/common/ddi/media_libva.h	2025-06-23 15:17:11.923532726 +0200
+@@ -71,7 +71,7 @@
  #endif
  #define DDI_CODEC_GEN_MAX_ATTRIBS_TYPE             4    //VAConfigAttribRTFormat,    VAConfigAttribRateControl,    VAConfigAttribDecSliceMode,    VAConfigAttribEncPackedHeaders
  
