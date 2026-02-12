@@ -11,6 +11,7 @@ Source1:        %{name}.metainfo.xml
 Source2:        %{name}.py
 Source3:        %{name}.svg
 Patch0:         %{name}-info.patch
+Patch1:         %{name}-cmake.patch
 
 BuildRequires:  cmake
 BuildRequires:  gcc-c++
