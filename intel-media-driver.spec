@@ -1,5 +1,5 @@
 Name:           intel-media-driver
-Version:        26.1.3
+Version:        26.1.4
 Release:        1%{?dist}
 Epoch:          1
 Summary:        VA-API user mode driver for GEN based graphics hardware
@@ -114,6 +114,9 @@ appstream-util validate --nonet %{buildroot}%{_metainfodir}/%{name}.metainfo.xml
 %{_libdir}/pkgconfig/igfxcmrt.pc
 
 %changelog
+* Thu Mar 19 2026 Simone Caronni <negativo17@gmail.com> - 1:26.1.4-1
+- Update to 26.1.4.
+
 * Sun Mar 08 2026 Simone Caronni <negativo17@gmail.com> - 1:26.1.3-1
 - Update to 26.1.3.
 
