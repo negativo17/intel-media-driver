@@ -1,15 +1,15 @@
 Name:           intel-media-driver
 Version:        26.3.5
-Release:        1%{?dist}
+Release:        2%{?dist}
 Epoch:          1
 Summary:        VA-API user mode driver for GEN based graphics hardware
 License:        MIT and BSD-3-Clause
 URL:            https://01.org/linuxmedia/vaapi
 
 Source0:        https://github.com/intel/media-driver/archive/intel-media-%{version}.tar.gz
-Source1:        %{name}.metainfo.xml
+Source1:        com.intel.media_driver.metainfo.xml
 Source2:        %{name}.py
-Source3:        %{name}.svg
+Source3:        com.intel.media_driver.svg
 Patch0:         %{name}-info.patch
 
 BuildRequires:  cmake
@@ -89,19 +89,19 @@ export CXXFLAGS="%{optflags} -D_FILE_OFFSET_BITS=64"
 %cmake_install
 
 # Install AppData and add modalias provides
-install -pm 0644 -D %{SOURCE1} %{buildroot}%{_metainfodir}/%{name}.metainfo.xml
-%{SOURCE2} . | xargs appstream-util add-provide %{buildroot}%{_metainfodir}/%{name}.metainfo.xml modalias
-install -pm 0644 -D %{SOURCE3} %{buildroot}%{_datadir}/pixmaps/%{name}.svg
+install -pm 0644 -D %{SOURCE1} %{buildroot}%{_metainfodir}/com.intel.media_driver.metainfo.xml
+%{SOURCE2} . | xargs appstream-util add-provide %{buildroot}%{_metainfodir}/com.intel.media_driver.metainfo.xml modalias
+install -pm 0644 -D %{SOURCE3} %{buildroot}%{_datadir}/pixmaps/com.intel.media_driver.svg
 
 %check
-appstream-util validate --nonet %{buildroot}%{_metainfodir}/%{name}.metainfo.xml
+appstream-util validate --nonet %{buildroot}%{_metainfodir}/com.intel.media_driver.metainfo.xml
 
 %files -n libva-intel-media-driver
 %license LICENSE.md
 %doc README.md
 %{_libdir}/dri/iHD_drv_video.so
-%{_metainfodir}/%{name}.metainfo.xml
-%{_datadir}/pixmaps/%{name}.svg
+%{_metainfodir}/com.intel.media_driver.metainfo.xml
+%{_datadir}/pixmaps/com.intel.media_driver.svg
 
 %files -n libigfxcmrt
 %license LICENSE.md
@@ -113,6 +113,9 @@ appstream-util validate --nonet %{buildroot}%{_metainfodir}/%{name}.metainfo.xml
 %{_libdir}/pkgconfig/igfxcmrt.pc
 
 %changelog
+* Fri Oct 02 2026 Simone Caronni <negativo17@gmail.com> - 1:26.3.5-2
+- Switch to reverse DNS AppStream ID.
+
 * Tue Sep 29 2026 Simone Caronni <negativo17@gmail.com> - 1:26.3.5-1
 - Update to 26.3.5.
 

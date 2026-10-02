@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="driver">
-  <id>intel-media-driver</id>
+  <id>com.intel.media_driver</id>
   <name>Intel VA-API driver</name>
   <summary>Hardware accelerated decoding, encoding, and video post processing for GEN based graphics hardware</summary>
   <developer id="com.intel">
     <name>Intel Corporation</name>
   </developer>
-  <icon type="local">/usr/share/pixmaps/intel-media-driver.svg</icon>
+  <icon type="local">/usr/share/pixmaps/com.intel.media_driver.svg</icon>
   <description>
     <p>The Intel Media Driver for VAAPI is a new VA-API (Video Acceleration API) user mode driver supporting hardware accelerated decoding, encoding, and video post processing for GEN based graphics hardware.</p>
   </description>
