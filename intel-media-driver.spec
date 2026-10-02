@@ -88,9 +88,9 @@ export CXXFLAGS="%{optflags} -D_FILE_OFFSET_BITS=64"
 %install
 %cmake_install
 
-# Install AppData and add modalias provides
+# Install AppData and add modalias provides, do not use appstream-util add-provide as it mangles the xml
 install -pm 0644 -D %{SOURCE1} %{buildroot}%{_metainfodir}/com.intel.media_driver.metainfo.xml
-%{SOURCE2} . | xargs appstream-util add-provide %{buildroot}%{_metainfodir}/com.intel.media_driver.metainfo.xml modalias
+%{SOURCE2} . %{buildroot}%{_metainfodir}/com.intel.media_driver.metainfo.xml
 install -pm 0644 -D %{SOURCE3} %{buildroot}%{_datadir}/pixmaps/com.intel.media_driver.svg
 
 %check
@@ -115,6 +115,8 @@ appstream-util validate --nonet %{buildroot}%{_metainfodir}/com.intel.media_driv
 %changelog
 * Fri Oct 02 2026 Simone Caronni <negativo17@gmail.com> - 1:26.3.5-2
 - Switch to reverse DNS AppStream ID.
+- Do not use appstream-util add-provide, it drops the developer tag. Same fix
+  as in the NVIDIA drivers.
 
 * Tue Sep 29 2026 Simone Caronni <negativo17@gmail.com> - 1:26.3.5-1
 - Update to 26.3.5.
