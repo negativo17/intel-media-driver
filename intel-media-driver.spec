@@ -115,6 +115,7 @@ appstream-util validate --nonet %{buildroot}%{_metainfodir}/com.intel.media_driv
 %changelog
 * Tue Oct 13 2026 Simone Caronni <negativo17@gmail.com> - 1:26.4.0-1
 - Update to 26.4.0.
+- Add developer_name to AppStream metadata for repository catalogs.
 
 * Fri Oct 02 2026 Simone Caronni <negativo17@gmail.com> - 1:26.3.5-2
 - Switch to reverse DNS AppStream ID.
