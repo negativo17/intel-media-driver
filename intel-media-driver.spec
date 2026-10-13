@@ -1,6 +1,6 @@
 Name:           intel-media-driver
-Version:        26.3.5
-Release:        2%{?dist}
+Version:        26.4.0
+Release:        1%{?dist}
 Epoch:          1
 Summary:        VA-API user mode driver for GEN based graphics hardware
 License:        MIT and BSD-3-Clause
@@ -113,6 +113,9 @@ appstream-util validate --nonet %{buildroot}%{_metainfodir}/com.intel.media_driv
 %{_libdir}/pkgconfig/igfxcmrt.pc
 
 %changelog
+* Tue Oct 13 2026 Simone Caronni <negativo17@gmail.com> - 1:26.4.0-1
+- Update to 26.4.0.
+
 * Fri Oct 02 2026 Simone Caronni <negativo17@gmail.com> - 1:26.3.5-2
 - Switch to reverse DNS AppStream ID.
 - Do not use appstream-util add-provide, it drops the developer tag. Same fix
